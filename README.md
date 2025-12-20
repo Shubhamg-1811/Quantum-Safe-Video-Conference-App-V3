@@ -315,9 +315,9 @@ Contributions are welcome! This is an academic project from IIT Jammu.
 
 ## Supervisor
 
-**Prof. Sumit Kumar Pandey**
-**Assistant Professor of CSE Department**
-**Indian Institute of Technology Jammu**
+**Prof. Sumit Kumar Pandey**   
+**Assistant Professor of CSE Department**  
+**Indian Institute of Technology Jammu**  
 
 ---
 
