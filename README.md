@@ -6,7 +6,7 @@
 
 A **quantum-resistant** real-time video conferencing application implementing NIST-standardized post-quantum cryptography. Built with Qt6, GStreamer, and the liboqs library, this system protects against both classical and future quantum computer attacks while providing secure, low-latency video and audio communication.
 
-> **🚀 Why Post-Quantum?** Traditional RSA and ECC encryption will be broken by quantum computers. This application implements **Kyber-768** (ML-KEM) and **Dilithium** (ML-DSA), algorithms standardized by NIST in August 2024 to resist quantum attacks.
+> **🚀 Why Post-Quantum?** Traditional RSA and ECC encryption will be broken by quantum computers. This application implements **Kyber-768** (ML-KEM) and **Dilithium3** (ML-DSA-65), algorithms standardized by NIST in August 2024 to resist quantum attacks.
 
 ---
 
@@ -26,7 +26,7 @@ A **quantum-resistant** real-time video conferencing application implementing NI
 
 ## ✨ Key Features
 
-- 🛡️ **Post-Quantum Cryptography**: NIST-standardized **Kyber-768** (ML-KEM) for key exchange and **Dilithium2** (ML-DSA-65) for digital signatures
+- 🛡️ **Post-Quantum Cryptography**: NIST-standardized **Kyber-768** (ML-KEM) for key exchange and **Dilithium3** (ML-DSA-65) for digital signatures
 - 🔒 **End-to-End Encryption**: AES-256-ICM + HMAC-SHA1-80 over SRTP for media streams
 - 📹 **Real-Time Video/Audio**: GStreamer-based multimedia framework with H.264 encoding and Opus audio
 - 💻 **Intuitive Qt6 GUI**: Cross-platform interface with one-click connection setup
@@ -68,7 +68,7 @@ A **quantum-resistant** real-time video conferencing application implementing NI
 1. **Client** initiates connection
 2. **Server** responds with Kyber-768 public key
 3. **Client** encapsulates shared secret using Kyber-768
-4. **Client** signs encapsulated key with Dilithium2
+4. **Client** signs encapsulated key with Dilithium3
 5. **Server** verifies signature and decapsulates secret
 6. **Both parties** derive SRTP keys using HKDF-SHA256
 7. **Media streams** encrypted with AES-256 + HMAC
@@ -225,7 +225,7 @@ clean:
 | Component | Algorithm | Security Level | Key/Signature Size |
 |-----------|-----------|----------------|-------------------|
 | **Key Exchange** | Kyber-768 (ML-KEM) | NIST Level 3 (192-bit quantum) | 1184 bytes (pk), 1088 bytes (ct) |
-| **Digital Signature** | Dilithium2 (ML-DSA-65) | NIST Level 2 (128-bit quantum) | 1312 bytes (pk), 2420 bytes (sig) |
+| **Digital Signature** | Dilithium3 (ML-DSA-65) | NIST Level 3 (192-bit quantum) | 1952 bytes (pk), 3309 bytes (sig) |
 | **Stream Encryption** | AES-256-ICM | 256-bit classical, 128-bit quantum | 32 bytes (key) |
 | **Authentication** | HMAC-SHA1-80 | 80-bit MAC | 10 bytes (tag) |
 
