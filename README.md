@@ -166,18 +166,19 @@ Quantum_Secure_Video_Conference_App_V3/
 │   ├── launchwindow.h/cpp       # Connection UI
 │   ├── frontend.pro             # Qt project file
 │   └── frontend                 # Compiled executable
-└── backend/                     # C++ Backend
-    ├── src/
-    │   ├── server_main.cpp      # Server implementation
-    │   ├── client_main.cpp      # Client implementation
-    │   ├── crypto_utils.cpp     # AES-256, HMAC utilities
-    │   └── auth_protocol.cpp    # Kyber + Dilithium protocol
-    ├── include/
-    │   ├── crypto_utils.h
-    │   └── auth_protocol.h
-    ├── Makefile                 # Build configuration
-    ├── server                   # Server executable
-    └── client                   # Client executable
+├── backend/                     # C++ Backend
+│   ├── src/
+│   │   ├── server_main.cpp      # Server implementation
+│   │   ├── client_main.cpp      # Client implementation
+│   │   ├── crypto_utils.cpp     # AES-256, HMAC utilities
+│   │   └── auth_protocol.cpp    # Kyber + Dilithium protocol
+│   ├── include/
+│   │   ├── crypto_utils.h
+│   │   └── auth_protocol.h
+│   ├── Makefile                 # Build configuration
+│   ├── server                   # Server executable
+│   └── client                   # Client executable
+└── Performance Analysis Report
 ```
 
 ---
@@ -236,9 +237,7 @@ clean:
 
 ---
 
-## 📊 Performance
-
-### Video & Audio Quality
+## 📊 Video & Audio Quality
 
 - **Resolution**: 640x480 @ 30 FPS
 - **Video Codec**: H.264 (500-1500 kbps)
@@ -277,6 +276,56 @@ pkg-config --modversion liboqs
 
 ---
 
+## 📊 Performance Analysis
+
+This repository includes a comprehensive **Performance Analysis Report** comparing **Post-Quantum Cryptographic algorithms** with **RSA-2048**, focusing on security, computational performance, and real-world protocol overhead.
+
+📄 **Report:** `Performance Analysis Report.pdf` 
+
+---
+
+### Security Comparison
+
+* **RSA-2048** is **quantum-vulnerable** due to Shor’s algorithm and is deprecated for long-term security.
+* **Kyber-768** and **Dilithium3** provide **192-bit post-quantum security**, meeting **NIST Level-3** standards.
+
+---
+
+### Cryptographic Performance
+
+Despite larger key and signature sizes, post-quantum algorithms significantly outperform RSA-2048:
+
+* **Kyber-768:** Key exchange operations are **~8000× faster** than RSA-2048 with total crypto time: **0.034 ms vs ~280 ms**
+* **Dilithium3:** Signing: **13× faster** and Verification: **1.6× faster**
+
+This demonstrates that post-quantum cryptography is **computationally efficient**, even outperforming classical cryptography in practice.
+
+---
+
+### Protocol & Handshake Analysis
+
+* **Post-Quantum Handshake Time:** ~740 ms
+* **RSA-2048 TLS Handshake:** ~100–150 ms
+* **Crypto operations contribute <1 ms** of the total time.
+* The higher latency is primarily due to:
+
+  * Multiple round trips (no 1-RTT optimization yet)
+  * File I/O during key handling
+  * Additional verification steps
+
+* **Bandwidth Overhead:** PQ handshake adds ~**5.9 KB**, which is negligible on modern networks
+  *(≈ 0.03 seconds of 1080p video streaming)*
+
+---
+
+###  Future Optimizations
+* Reduce round-trip messages
+* Remove file I/O from the handshake critical path
+* Implement session resumption
+* Optimize message batching and framing
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! This is an academic project from IIT Jammu.
@@ -307,7 +356,7 @@ Contributions are welcome! This is an academic project from IIT Jammu.
 
 ## 👨‍💻 Authors
 
-**[Vikas Prajapati](https://www.linkedin.com/in/vikas-prajapati-577bab252/) || [Shubham Gupta](https://www.linkedin.com/in/shubham-gupta-79876a255/) || [Shivani Consul](https://www.linkedin.com/in/shivani-consul-804b59256/)**   
+**[Shubham Gupta](https://www.linkedin.com/in/shubham-gupta-79876a255/) || [Vikas Prajapati](https://www.linkedin.com/in/vikas-prajapati-577bab252/) || [Shivani Consul](https://www.linkedin.com/in/shivani-consul-804b59256/)**   
 **Indian Institute of Technology Jammu**  
 **B.Tech Project (BTP)**  
 
@@ -331,4 +380,4 @@ Contributions are welcome! This is an academic project from IIT Jammu.
 
 **🔐 Quantum-safe. Future-proof. Secure today, tomorrow, and beyond.**
 
-*Last Updated: December 20, 2025*
+*Last Updated: January 10, 2026*
